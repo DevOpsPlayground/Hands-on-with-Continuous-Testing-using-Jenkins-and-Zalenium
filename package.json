@@ -12,6 +12,7 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "wdio-mocha-framework": "^0.6.1",
-    "webdriverio": "^4.13.2"
+    "webdriverio": "^4.13.2",
+    "wdio-allure-reporter": "~0.8.2"
   }
 }
