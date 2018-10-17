@@ -13,11 +13,25 @@ We will provide you with a machine IP address which is your Ubuntu Virtual Machi
     
 3. You will be prompted for a password. The password for all machines is `playground`. 
 
-## Accessing Jenkins on Your VM
+## Starting Jenkins on Your VM
+
+'Scripts here'
 
 ## Creating a Jenkins Pipeline
 
+'Through the UI'
+
 ## Running Your Jenkins Pipeline
 
+Add steps for:
+
+- Checking out code.
+- Starting Zalenium
+- Installing Node
+- Running tests.
+
 ## Reporting Using Allure
+
+- Generate reports using Allure in Pipeline
+- Show the reports.
 
