@@ -1,6 +1,6 @@
 var assert = require('assert');
 describe('my webdriverio tests', function(){
-	it('Github test',function() {
+	it('Google Test 2',function() {
  		browser.url('http://www.google.com')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
