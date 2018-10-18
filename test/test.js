@@ -1,5 +1,5 @@
 var assert = require('assert');
-describe('my webdriverio tests', function(){
+describe('Google Test Suite', function(){
 	it('Google Test 1',function() {
  		browser.url('http://www.google.com')
  		const title = browser.getTitle();
