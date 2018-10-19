@@ -30,7 +30,7 @@ You will now be connected to your VM via SSH. The majority of our Playground wil
 1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: http://yourVmIp:8080
 2. To log in to Jenkins, use the following credentials:
 
-Username: `DevOps`
+Username: `DevOps`  
 Password: `Playground`
 
 ## Jenkins Plugins to Install
