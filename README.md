@@ -35,7 +35,17 @@ Password: `Playground`
 
 ## Jenkins Plugins to Install
 
-1. Blue Ocean, NodeJS, Allure
+We are going to install some required Plugins for the Playground this evening.
+
+1. From the Jenkins home page click on the **Manage Jenkins** button from the menu on the left.  
+
+![](images/manageJenkins.png)
+
+2. Select **Manage Plugins** from this page.
+
+![](images/managePlugins.png)
+
+NEED TO FINISH THIS.
 
 ## Creating a Jenkins Pipeline
 
@@ -82,6 +92,8 @@ pipeline {
     }
 }
 ```
+
+3. Once the code has been pased in then press the **Save** button at the bottom of the page.
 
 ![](images/pipelineEdit.png)
 
