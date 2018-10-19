@@ -50,8 +50,8 @@ We are now presented with the Jenkins Pipeline configuration page.
 
 ## Editing Your Jenkins Pipeline
 
-For the purposes of this evening's Playground we will be editing our pipeline script in the Pipeline script editor in the Jenkins UI.
-**Please note** that better practice would be to have a 'Jenkinsfile' in a repository. This would put your Pipeline script under version control meaning you can see previous versions of the script.
+For the purposes of this evening's Playground we will be editing our pipeline script in the Pipeline script editor in the Jenkins UI.  
+**Please note** that better practice would be to have a 'Jenkinsfile' in a repository. This would put your Pipeline script under version control meaning you can see previous versions of the script.  
 More information can be found here: https://jenkins.io/doc/book/pipeline/jenkinsfile/ 
 
 ![](images/pipelineButton.png)
