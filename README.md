@@ -51,10 +51,37 @@ We are now presented with the Jenkins Pipeline configuration page.
 ## Editing Your Jenkins Pipeline
 
 For the purposes of this evening's Playground we will be editing our pipeline script in the Pipeline script editor in the Jenkins UI.  
-**Please note** that better practice would be to have a 'Jenkinsfile' in a repository. This would put your Pipeline script under version control meaning you can see previous versions of the script.  
-More information can be found here: https://jenkins.io/doc/book/pipeline/jenkinsfile/ 
+**Please note** that better practice would be to have a 'Jenkinsfile' in a repository. This would put your Pipeline script under version control meaning you can track changes and revert to previous versions of the script.  
+More information can be found here: https://jenkins.io/doc/book/pipeline/jenkinsfile/  
 
-![](images/pipelineButton.png)
+1. Select the **Pipeline** option in the toolbar at the top of the page.  
+![](images/pipelineButton.png)  
+
+2. In the Pipeline editor paste in the following code:
+
+```
+pipeline {
+    agent any
+    stages {
+        stage('Code and Dependencies'){
+            stage('Checkout Code'){
+                steps{
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                }
+            }
+            stage('Install Dependencies'){
+                steps{
+                    sh 'npm install'
+                    sh 'npm install wdio-allure-reporter --save-dev'
+                    sh 'npm install -g allure-commandline --save-dev'
+                    sh 'docker pull elgalu/selenium'
+                    sh 'docker pull dosel/zalenium'
+                }
+            }
+        }
+    }
+}
+```
 
 ![](images/pipelineEdit.png)
 
