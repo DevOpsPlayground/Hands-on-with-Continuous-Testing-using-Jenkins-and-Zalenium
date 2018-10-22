@@ -35,7 +35,7 @@ Password: `Playground`
 
 ## Jenkins Plugins to Install
 
-We are going to install some required Plugins for the Playground this evening.
+We are going to install some Plugins for the Playground this evening; **NodeJS** for running the tests, **Allure** for generating reports at the end of the test run and **Blue Ocean** to visualise the Pipeline as it is being run.
 
 1. From the Jenkins home page click on the **Manage Jenkins** button from the menu on the left.  
 
@@ -54,6 +54,10 @@ We are going to install some required Plugins for the Playground this evening.
 ![](images/filterNode.png)
 
 5. Select the checkbox for **NodeJS**.
+
+6. In the **Filter** bar now search for `Blue Ocean`.
+
+7. Select the checkbox for **Blue Ocean**.
 
 6. In the **Filter** bar now search for `Allure`.
 
@@ -78,7 +82,7 @@ Password: `Playground`
 
 ![](images/manageJenkins.png)
 
-4. Select **Global Tool Configuration**
+4. Select **Global Tool Configuration**.
 
 ![](images/globalConfig.png)
 
@@ -88,8 +92,8 @@ Password: `Playground`
 
 6. Enter the following credentials:
 
-Name: `node`
-Version: `NodeJS 8.12.0`
+Name: `node`  
+Version: `NodeJS 8.12.0`  
 Leave everything else as default.
 
 Press the **Save** button at the bottom of the page.
@@ -102,8 +106,8 @@ Press the **Save** button at the bottom of the page.
 
 9. Enter the following credentials:
 
-Name: `allure`
-Version: `2.7.0`
+Name: `allure`   
+Version: `2.7.0`  
 
 Press the **Save** button at the bottom of the page.
 
@@ -111,7 +115,7 @@ Press the **Save** button at the bottom of the page.
 
 ## Creating a Jenkins Pipeline
 
-1. Click on the **Create New Jobs** link from the Jenkins home page.
+1. Navigate back to the Jenkins Dashboard and click on the **Create New Jobs** link.
 2. In the 'Enter an item name' at the top of the page type in `zalenium-pipeline`.
 3. Select the **Pipeline** option from the options below.
 4. Click on the **OK** button at the bottom of the page.
@@ -120,7 +124,7 @@ Press the **Save** button at the bottom of the page.
 
 We are now presented with the Jenkins Pipeline configuration page.
 
-## Editing Your Jenkins Pipeline
+## Editing Your Jenkins Pipeline to Checkout Code and Install Dependencies
 
 For the purposes of this evening's Playground we will be editing our pipeline script in the Pipeline script editor in the Jenkins UI.  
 **Please note** that better practice would be to have a 'Jenkinsfile' in a repository. This would put your Pipeline script under version control meaning you can track changes and revert to previous versions of the script.  
@@ -134,8 +138,10 @@ More information can be found here: https://jenkins.io/doc/book/pipeline/jenkins
 ```
 pipeline {
     agent any
+    tools {nodejs 'node'}
     stages {
         stage('Code and Dependencies'){
+            parallel{
             stage('Checkout Code'){
                 steps{
                     git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
@@ -151,6 +157,7 @@ pipeline {
                 }
             }
         }
+        }
     }
 }
 ```
@@ -161,6 +168,20 @@ pipeline {
 
 ## Running Your Jenkins Pipeline
 
+1. On the left hand menu, select **Open Blue Ocean**.
+
+2. Select **zalenium-pipeline**.
+
+3. A pop-up will appear telling you that the job has not been run. Press the **Run** button.
+
+![](images/run.png)
+
+4. Refresh the page and you should see the first run of your Pipeline running.If you click on the job then you will see a visualisation of your Pipeline.
+
+![](images/blueOcean1.png)
+
+4. The first run will take a bit longer as NodeJS is unpacked on your Jenkins VM and the Zalenium and Selenium Docker images are pulled. After a few minutes, all stages of the Pipeline should be green indicating a success!
+
 Add steps for:
 
 - Checking out code.
@@ -168,8 +189,157 @@ Add steps for:
 - Installing Node
 - Running tests.
 
+## Extending the Pipeline
+
+We now have our Pipeline installing dependencies and checking out the test code from a Git repo in preparation for our tests being run. We now want to add Zalenium into the mix.
+
+1. From **Blue Ocean** select the configure icon from the top right-hand side of the screen. This will take us back to the Pipeline editor view.
+
+ ![](images/cog.png)
+
+2. We want to add a Pipeline stage for starting Zalenium and running our tests. Paste the following code into the Pipeline editor:  
+
+```
+pipeline {
+    agent any
+    tools {nodejs 'node'}
+    stages {
+        stage('Code and Dependencies'){
+            parallel{
+            stage('Checkout Code'){
+                steps{
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                }
+            }
+            stage('Install Dependencies'){
+                steps{
+                    sh 'npm install'
+                    sh 'npm install wdio-allure-reporter --save-dev'
+                    sh 'npm install -g allure-commandline --save-dev'
+                    sh 'docker pull elgalu/selenium'
+                    sh 'docker pull dosel/zalenium'
+                }
+            }
+            }
+        }
+            stage ('Start Zalenium'){
+                steps{
+                    sh 'docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
+                }
+            }
+            stage ('Run Tests'){
+                steps{
+                    sh './node_modules/.bin/wdio wdio.conf.js'
+                }
+            }
+            stage ('Stop Zalenium'){
+                steps{
+                    sh 'docker stop zalenium'
+                }
+            }
+    }
+}
+```
+
+You can see that two stages have been added to the pipeline.   
+
+**Start Zalenium** which uses our Zalenium start command from the last Playground.  
+**Run Tests** which will start our NodeJS tests.  
+**Stop Zalenium** which will tear down the Zalenium container at the end of the test run.
+
+3. After pasting in this script, press **Save**.
+
+4. Select **Open Blue Ocean** from the left-hand side menu.
+
+5. Press the **Run** button after opening **Blue Ocean**.
+
+ ![](images/runBO.png)
+
+You can view the Pipeline being run in BLue Ocean as before. At the end of the run your Blue Ocean should look similar to this:
+
+ ![](images/stage2Run.png)
+
 ## Reporting Using Allure
 
-- Generate reports using Allure in Pipeline
-- Show the reports.
+We now have tests running in Jenkins using Zalenium as our Grid. Now we want to add some test reports using Allure -  http://webdriver.io/guide/reporters/allure.html.
 
+We have already completed the first part of adding Allure to our WebDriver.io config but now we need to add the Allure step into our Jenkins pipeline to display our reports within Jenkins.
+
+1. From **Blue Ocean** select the configure icon from the top right-hand side of the screen. This will take us back to the Pipeline editor view.
+
+2. Paste in the following Groovy script to your Pipeline Editor:
+
+```
+pipeline {
+    agent any
+    tools {nodejs 'node'}
+    stages {
+        stage('Code and Dependencies'){
+            parallel{
+            stage('Checkout Code'){
+                steps{
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                }
+            }
+            stage('Install Dependencies'){
+                steps{
+                    sh 'npm install'
+                    sh 'npm install wdio-allure-reporter --save-dev'
+                    sh 'npm install -g allure-commandline --save-dev'
+                    sh 'docker pull elgalu/selenium'
+                    sh 'docker pull dosel/zalenium'
+                }
+            }
+            }
+        }
+            stage ('Start Zalenium'){
+                steps{
+                    sh 'docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
+                }
+            }
+            stage ('Run Tests'){
+                steps{
+                    sh './node_modules/.bin/wdio wdio.conf.js'
+                }
+            }
+            stage ('Generate Allure Reports'){
+                steps{
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'allure-results']]
+                    ])
+                }
+            }
+            stage ('Stop Zalenium'){
+                steps{
+                    sh 'docker stop zalenium'
+                }
+            }
+    }
+}
+```
+
+3. After pasting in the script press **Save**.
+
+4. Select **Open Blue Ocean** from the left-hand side menu.
+
+5. Press the **Run** button after opening **Blue Ocean**.
+
+6. Once the run is complete, your Pipeline should look like the following:
+
+ ![](images/stage3Run.png)
+
+7. To access the **Allure** reports, select the **Go To Classic** button at the top right-hand side of the screen.
+
+ ![](images/classic.png)
+
+ 8. You are now presented with a list of the **Build Artifacts** in the classic Jenkins view. Select the Allure Report button.
+
+ ![](images/classic.png)
+
+ 9. You can now see the HTML report that **Allure** has generated. This provides you with rhe results of each test.
+
+ 
