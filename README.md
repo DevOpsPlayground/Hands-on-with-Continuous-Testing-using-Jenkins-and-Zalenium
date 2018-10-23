@@ -10,21 +10,6 @@ In order to get the most out of this session we have pre-installed some componen
 - We installed Java using these instructions - https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
 - We installed Jenkins using these instructions- https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-16-04
 
-## Accessing Your Machine
-
-Tonight's Playground will be performed using a command line tool and a web browser.
-
-We will provide you with a machine IP address which is your Ubuntu Virtual Machine (VM) for the duration of tonight's DevOps Playground.
-
-1. To access your machine first open a Terminal/Command window and enter the following command:
-`ssh DevOps@your.Ip`
-
-2. You will be asked about whether you wish to proceed, type `yes` and press return.
-    
-3. You will be prompted for a password. The password for all machines is `Devopsplayground!`. 
-
-You will now be connected to your VM via SSH. The majority of our Playground will be performed using the web browser, but we may need to access this terminal window later in the session.
-
 ## Accessing Your Jenkins Instance
 
 1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: http://yourVmIp:8080
@@ -255,7 +240,7 @@ You can see that two stages have been added to the pipeline.
 
  ![](images/runBO.png)
 
-You can view the Pipeline being run in BLue Ocean as before. At the end of the run your Blue Ocean should look similar to this:
+You can view the Pipeline being run in Blue Ocean as before. At the end of the run your Blue Ocean should look similar to this:
 
  ![](images/stage2Run.png)
 
@@ -342,4 +327,3 @@ pipeline {
 
  9. You can now see the HTML report that **Allure** has generated. This provides you with rhe results of each test.
 
- 
