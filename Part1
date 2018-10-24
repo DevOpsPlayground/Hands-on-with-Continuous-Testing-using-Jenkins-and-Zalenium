@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    tools {nodejs 'node'}
+    stages {
+        stage('Code and Dependencies'){
+            parallel{
+            stage('Checkout Code'){
+                steps{
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                }
+            }
+            stage('Install Dependencies'){
+                steps{
+                    sh 'npm install'
+                    sh 'npm install wdio-allure-reporter --save-dev'
+                    sh 'npm install -g allure-commandline --save-dev'
+                    sh 'docker pull elgalu/selenium'
+                    sh 'docker pull dosel/zalenium'
+                }
+            }
+        }
+        }
+    }
+}
