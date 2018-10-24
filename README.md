@@ -12,7 +12,7 @@ In order to get the most out of this session we have pre-installed some componen
 
 ## Accessing Your Jenkins Instance
 
-1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: http://yourVmIp:8080
+1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: http://{yourVmIp}:8080
 2. To log in to Jenkins, use the following credentials:
 
 Username: `DevOps`  
@@ -101,7 +101,7 @@ Press the **Save** button at the bottom of the page.
 ## Creating a Jenkins Pipeline
 
 1. Navigate back to the Jenkins Dashboard and click on the **Create New Jobs** link.
-2. In the 'Enter an item name' at the top of the page type in `zalenium-pipeline`.
+2. In the 'Enter an item name' at the top of the page name it something sensible, like: `zalenium-pipeline`.
 3. Select the **Pipeline** option from the options below.
 4. Click on the **OK** button at the bottom of the page.
 
@@ -243,6 +243,8 @@ You can see that two stages have been added to the pipeline.
 You can view the Pipeline being run in Blue Ocean as before. At the end of the run your Blue Ocean should look similar to this:
 
  ![](images/stage2Run.png)
+
+ You can also view your tests being run by accessing: http://{yourVmIp}:4444/grid/console 
 
 ## Reporting Using Allure
 
