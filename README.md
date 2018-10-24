@@ -87,13 +87,6 @@ pipeline {
 
 4. The first run will take a bit longer as NodeJS is unpacked on your Jenkins VM and the Zalenium and Selenium Docker images are pulled. After a few minutes, all stages of the Pipeline should be green indicating a success!
 
-Add steps for:
-
-- Checking out code.
-- Starting Zalenium
-- Installing Node
-- Running tests.
-
 ## Extending the Pipeline
 
 We now have our Pipeline installing dependencies and checking out the test code from a Git repo in preparation for our tests being run. We now want to add Zalenium into the mix.
