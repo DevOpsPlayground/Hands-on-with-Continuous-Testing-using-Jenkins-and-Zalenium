@@ -164,7 +164,7 @@ You can view the Pipeline being run in Blue Ocean as before. At the end of the r
 
  ![](images/stage2Run.png)
 
- You can also view your tests being run by accessing: http://{yourVmIp}:4444/grid/console 
+ You can also view your tests being run by accessing: [http://{yourVmIp}:4444/grid/console](http://yourVmIp:4444/grid/console)
 
 ## Reporting Using Allure
 
