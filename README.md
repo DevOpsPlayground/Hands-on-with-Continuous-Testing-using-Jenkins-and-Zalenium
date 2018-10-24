@@ -12,91 +12,11 @@ In order to get the most out of this session we have pre-installed some componen
 
 ## Accessing Your Jenkins Instance
 
-1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: http://{yourVmIp}:8080
+1. Jenkins has already been installed and is up and running on your VM. To access Jenkins use the following URL: [http://{yourVmIp}:8080](http://yourVmIp:8080)
 2. To log in to Jenkins, use the following credentials:
 
 Username: `DevOps`  
 Password: `Playground`
-
-## Jenkins Plugins to Install
-
-We are going to install some Plugins for the Playground this evening; **NodeJS** for running the tests, **Allure** for generating reports at the end of the test run and **Blue Ocean** to visualise the Pipeline as it is being run.
-
-1. From the Jenkins home page click on the **Manage Jenkins** button from the menu on the left.  
-
-![](images/manageJenkins.png)
-
-2. Select **Manage Plugins** from this page.
-
-![](images/managePlugins.png)
-
-3. Select the **Available** tab.
-
-![](images/available.png)
-
-4. In the **Filter** bar, search for `NodeJS`.
-
-![](images/filterNode.png)
-
-5. Select the checkbox for **NodeJS**.
-
-6. In the **Filter** bar now search for `Blue Ocean`.
-
-7. Select the checkbox for **Blue Ocean**.
-
-6. In the **Filter** bar now search for `Allure`.
-
-7. Click the **Download now and install after restart** button. This will install **NodeJS** and **Allure** plugins.
-
-![](images/installAfterRestart.png)
-
-8. Select the **Restart Jenkins when installation is complete and no jobs are running** checkbox. Jenkins will now restart.
-
-## Global Tool Configurations
-
-Jenkins restarts occasionally hang in the web browser so you may need to manually navigate to your Jenkins homepage: http://yourVmIp:8080 
-
-1. You will be required to log-in using the same credentials as before.  
-
-Username: `DevOps`  
-Password: `Playground`
-
-2. Navigate back to the Jenkins **Dashboard**.
-
-3. Select **Manage Jenkins**. 
-
-![](images/manageJenkins.png)
-
-4. Select **Global Tool Configuration**.
-
-![](images/globalConfig.png)
-
-5. You should see an option for **NodeJS** near the bottom of this page. Select the **Add NodeJS** button.
-
-![](images/addNode.png)
-
-6. Enter the following credentials:
-
-Name: `node`  
-Version: `NodeJS 8.12.0`  
-Leave everything else as default.
-
-Press the **Save** button at the bottom of the page.
-
-![](images/nodeConfig.png)
-
-7. Select back into **Global Tool Configuration** and look for **Allure Commandline** section.
-
-8. Select **Add Allure Commandline**
-
-9. Enter the following credentials:
-
-Name: `allure`   
-Version: `2.7.0`  
-
-Press the **Save** button at the bottom of the page.
-
-![](images/allureConfig.png)
 
 ## Creating a Jenkins Pipeline
 
