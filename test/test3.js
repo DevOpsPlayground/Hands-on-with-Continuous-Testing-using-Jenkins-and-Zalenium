@@ -1,10 +1,9 @@
 var assert = require('assert');
-describe('my webdriverio tests', function(){
-	it('Github test',function() {
- 		browser.url('https://ecs-digital.co.uk/insights')
+describe('Google Test Suite', function(){
+	it('Google Test 1',function() {
+ 		browser.url('http://www.google.com')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
-		browser.pause(2000);
- 		assert(title === 'ECS Digital – Insights and content');
+ 		assert(title === 'Google');
  	});
 });
