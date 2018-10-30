@@ -4,6 +4,7 @@ describe('my webdriverio tests', function(){
  		browser.url('https://ecs-digital.co.uk/insights')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
+		browser.pause(2000);
  		assert(title === 'ECS Digital – Insights and content');
  	});
 });
