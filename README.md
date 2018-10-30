@@ -49,7 +49,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
                 }
             }
             stage('Install Dependencies'){
@@ -106,7 +106,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
                 }
             }
             stage('Install Dependencies'){
@@ -127,7 +127,7 @@ pipeline {
             }
             stage ('Run Tests'){
                 steps{
-                    sh './node_modules/.bin/wdio wdio.conf.js'
+                    sh 'wdio wdio.conf.js'
                 }
             }
             stage ('Stop Zalenium'){
@@ -178,7 +178,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
+                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
                 }
             }
             stage('Install Dependencies'){
@@ -199,7 +199,7 @@ pipeline {
             }
             stage ('Run Tests'){
                 steps{
-                    sh './node_modules/.bin/wdio wdio.conf.js'
+                    sh 'wdio wdio.conf.js'
                 }
             }
             stage ('Generate Allure Reports'){
@@ -240,5 +240,5 @@ pipeline {
 
  ![](images/classic.png)
 
- 9. You can now see the HTML report that **Allure** has generated. This provides you with rhe results of each test.
+ 9. You can now see the HTML report that **Allure** has generated. This provides you with the results of each test in multiple different formats.
 
