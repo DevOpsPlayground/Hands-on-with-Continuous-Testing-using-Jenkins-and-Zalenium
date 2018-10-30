@@ -4,6 +4,6 @@ describe('my webdriverio tests', function(){
  		browser.url('https://ecs-digital.co.uk/')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
- 		assert(title === 'ECS');
+ 		assert(title === 'ECS Digital – Digital Transformation Consultancy');
  	});
 });
