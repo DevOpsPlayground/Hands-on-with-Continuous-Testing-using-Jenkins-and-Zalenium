@@ -4,6 +4,6 @@ describe('my webdriverio tests', function(){
  		browser.url('https://ecs-digital.co.uk/contact')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
- 		assert(title === 'Get in Touch');
+ 		assert(title === 'Get in Touch - ECS Digital');
  	});
 });
