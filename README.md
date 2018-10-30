@@ -49,7 +49,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
                 }
             }
             stage('Install Dependencies'){
@@ -75,13 +75,11 @@ pipeline {
 
 1. On the left hand menu, select **Open Blue Ocean**.
 
-2. Select **zalenium-pipeline**.
-
-3. A pop-up will appear telling you that the job has not been run. Press the **Run** button.
+2. A pop-up will appear telling you that the job has not been run. Press the **Run** button.
 
 ![](images/run.png)
 
-4. Refresh the page and you should see the first run of your Pipeline running.If you click on the job then you will see a visualisation of your Pipeline.
+3. Refresh the page and you should see the first run of your Pipeline running.If you click on the job then you will see a visualisation of your Pipeline.
 
 ![](images/blueOcean1.png)
 
@@ -106,7 +104,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
                 }
             }
             stage('Install Dependencies'){
@@ -127,7 +125,7 @@ pipeline {
             }
             stage ('Run Tests'){
                 steps{
-                    sh 'wdio wdio.conf.js'
+                    sh './node_modules/.bin/wdio wdio.conf.js'
                 }
             }
             stage ('Stop Zalenium'){
@@ -178,7 +176,7 @@ pipeline {
             parallel{
             stage('Checkout Code'){
                 steps{
-                    git 'https://github.com/farhanshaikh786/DEMOwebdriverio.git'
+                    git 'https://github.com/ecsdigital/devopsplayground-edi-9-zaleniumci.git'
                 }
             }
             stage('Install Dependencies'){
@@ -199,7 +197,7 @@ pipeline {
             }
             stage ('Run Tests'){
                 steps{
-                    sh 'wdio wdio.conf.js'
+                    sh './node_modules/.bin/wdio wdio.conf.js'
                 }
             }
             stage ('Generate Allure Reports'){
@@ -238,7 +236,7 @@ pipeline {
 
  8. You are now presented with a list of the **Build Artifacts** in the classic Jenkins view. Select the Allure Report button.
 
- ![](images/classic.png)
+ ![](images/allureReport.png)
 
  9. You can now see the HTML report that **Allure** has generated. This provides you with the results of each test in multiple different formats.
 
