@@ -1,9 +1,9 @@
 var assert = require('assert');
-describe('Google Test Suite', function(){
-	it('Google Test 4',function() {
- 		browser.url('http://www.google.com')
+describe('my webdriverio tests', function(){
+	it('Github test',function() {
+ 		browser.url('https://ecs-digital.co.uk/contact')
  		const title = browser.getTitle();
  		console.log('Title was: ' + title);
- 		assert(title === 'Google');
+ 		assert(title === 'Get in Touch');
  	});
 });
