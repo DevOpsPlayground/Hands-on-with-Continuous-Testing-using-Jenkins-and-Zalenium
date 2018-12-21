@@ -239,6 +239,3 @@ pipeline {
  ![](images/allureReport.png)
 
  9. You can now see the HTML report that **Allure** has generated. This provides you with the results of each test in multiple different formats.
- 
- Test
-
